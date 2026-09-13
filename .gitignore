@@ -1,0 +1,14 @@
+# WordPress credentials - never commit
+wp_config.py
+
+# debug/verification snapshots (not part of the project)
+check_*.html
+final_*.html
+live_check.html
+svc_check.html
+contatti_check.html
+rendered*.html
+post*.css
+base-desktop.css
+index.html
+index_stripped.html
