@@ -8,8 +8,8 @@ SECTIONS = []
 # ============ HEADER ============
 NAV_ITEMS = [
     ("#home", "Home", True),
-    ("#trattamenti", "Trattamenti", False),
-    ("#il-centro", "Il Centro", False),
+    ("/trattamenti/", "Trattamenti", False),
+    ("/il-centro/", "Il Centro", False),
     ("#prodotti", "Prodotti", False),
     ("/contatti/", "Contatti", False),
 ]
@@ -37,7 +37,7 @@ hero_inner_card = section([
         text("Trattamenti estetici personalizzati, per una pelle sana, luminosa e in equilibrio.",
              size=16, line_height=1.6),
         spacer(14),
-        btn("Scopri i trattamenti →", "#trattamenti"),
+        btn("Scopri i trattamenti →", "/trattamenti/"),
     ], hero_card),
 ], {}, inner=True)
 
@@ -72,7 +72,7 @@ svc_settings["_element_id"] = "services-strip"
 SECTIONS.append(section(svc_cols, svc_settings))
 
 # ============ TREATMENTS ============
-trattamenti_all_link = link_arrow("Tutti i trattamenti →", align="right")
+trattamenti_all_link = link_arrow("Tutti i trattamenti →", url="/trattamenti/", align="right")
 trattamenti_all_link["settings"]["_element_id"] = "trattamenti-all-link"
 trattamenti_head = section([
     column(70, [eyebrow("Scegli ciò di cui hai bisogno"),
@@ -81,19 +81,25 @@ trattamenti_head = section([
 ], sec_bg(color=BG), inner=True)
 
 treatments = [
-    ("treatment-viso.jpg", "Vuoi una pelle più luminosa?", "Scopri i trattamenti viso →"),
-    ("treatment-corpo.jpg", "Vuoi sentirti più leggera?", "Scopri i trattamenti corpo →"),
-    ("treatment-ciglia.jpg", "Vuoi valorizzare lo sguardo?", "Ciglia e sopracciglia →"),
-    ("treatment-benessere.jpg", "Vuoi rilassarti davvero?", "Scopri i trattamenti benessere →"),
+    ("treatment2-illuminante.jpg", "Vuoi una pelle più luminosa?", "Scopri i trattamenti viso →", "/trattamenti/#trattamenti-viso"),
+    ("treatment2-riducente.jpg", "Vuoi sentirti più leggera?", "Scopri i trattamenti corpo →", "/trattamenti/#trattamenti-corpo"),
+    ("treatment2-tatuaggio-sopracciglia.jpg", "Vuoi valorizzare lo sguardo?", "Ciglia e sopracciglia →", "/trattamenti/#trattamenti-ciglia"),
+    ("treatment-benessere.jpg", "Vuoi rilassarti davvero?", "Scopri i trattamenti benessere →", "/trattamenti/"),
 ]
+def photo_box(fname, ratio_pct=75, radius=16):
+    url = M[fname]["url"]
+    return text(f'<div style="width:100%;padding-top:{ratio_pct}%;position:relative;border-radius:{radius}px;'
+                f'overflow:hidden;background-image:url(\'{url}\');background-size:cover;'
+                f'background-position:center;"></div>')
+
 t_cols = []
-for photo, title, link_label in treatments:
+for photo, title, link_label, link_url in treatments:
     t_cols.append(column(25, [
-        image_widget(photo, radius=16),
+        photo_box(photo),
         spacer(14),
         heading(title, "h3", size=17, weight=500, font=FONT_BODY, line_height=1.4),
         spacer(6),
-        link_arrow(link_label),
+        link_arrow(link_label, url=link_url),
     ]))
 trattamenti_grid = section(t_cols, {"_element_id": "trattamenti-grid"}, inner=True)
 
@@ -113,7 +119,7 @@ studio_copy = [
          "sentire a tuo agio. Professionalità, ascolto e attenzione sono al centro di tutto ciò che facciamo.",
          size=15.5, line_height=1.6),
     spacer(14),
-    link_arrow("Scopri il centro →"),
+    link_arrow("Scopri il centro →", url="/il-centro/"),
     spacer(22),
     text(f'<p style="font-family:\'Playfair Display\',serif;font-style:italic;font-size:18px;color:{INK};margin:0;">'
          '"Bellezza è prendersi cura di sé."</p>'
@@ -124,7 +130,7 @@ studio_settings = sec_bg(color=BG_ALT)
 studio_settings["_element_id"] = "il-centro"
 studio_settings.update(section_pad(90, 90))
 SECTIONS.append(section([
-    column(50, [image_widget("studio-centro.jpg", radius=16)]),
+    column(50, [photo_box("centro-nail-station.jpg", ratio_pct=62, radius=16)]),
     column(50, studio_copy),
 ], studio_settings))
 
@@ -187,7 +193,7 @@ SECTIONS.append(section([
         spacer(16),
         widget("button", {
             "text": "Prenota su WhatsApp →",
-            "link": {"url": "https://wa.me/393476324326", "is_external": "true"},
+            "link": {"url": "https://wa.me/393476524326", "is_external": "true"},
             "align": "center",
             "background_color": "transparent",
             "button_text_color": CREAM,
@@ -256,7 +262,7 @@ def contact_row(icon_fname, label):
 contact_html = (
     f'<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px;'
     f'font-size:14px;color:{INK_SOFT};">'
-    + contact_row("contact-phone.png", "347 6324326")
+    + contact_row("contact-phone.png", "347 6524326")
     + contact_row("contact-pin.png", "Via Ruzante 10, Codevigo (PD)")
     + contact_row("contact-instagram.png", "beauty_boutique.sc")
     + '</ul>'
@@ -302,8 +308,8 @@ SECTIONS.append(section([
            {"content_position": "center"}),
     column(40, [text(
         f'<div style="display:flex;gap:18px;align-items:center;justify-content:flex-end;font-size:12.5px;color:{INK_FAINT};">'
-        '<a href="#" style="color:inherit;text-decoration:none;">Privacy Policy</a>'
-        '<a href="#" style="color:inherit;text-decoration:none;">Cookie Policy</a>'
+        '<a href="/privacy-policy/" style="color:inherit;text-decoration:none;">Privacy Policy</a>'
+        '<a href="/cookie-policy/" style="color:inherit;text-decoration:none;">Cookie Policy</a>'
         '<span>Powered by <a href="https://nardianna.it" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Nardi Creates</a></span></div>')],
            {"content_position": "center"}),
 ], bottom_settings))

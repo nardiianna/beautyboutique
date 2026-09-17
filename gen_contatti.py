@@ -6,8 +6,8 @@ SECTIONS = []
 
 NAV_ITEMS = [
     ("/#home", "Home", False),
-    ("/#trattamenti", "Trattamenti", False),
-    ("/#il-centro", "Il Centro", False),
+    ("/trattamenti/", "Trattamenti", False),
+    ("/il-centro/", "Il Centro", False),
     ("/#prodotti", "Prodotti", False),
     ("/contatti/", "Contatti", True),
 ]
@@ -58,7 +58,7 @@ info_settings = sec_bg(color=BG)
 info_settings["_element_id"] = "contatti-info"
 info_settings.update(section_pad(110, 110))
 SECTIONS.append(section([
-    info_item("contact-phone.png", "Telefono", "347 6324326",
+    info_item("contact-phone.png", "Telefono", "347 6524326",
                "Chiamaci per informazioni e prenotazioni"),
     info_item("contact-email.png", "Email", "samantharosellina@gmail.com",
                "Ti risponderemo il prima possibile"),
@@ -77,7 +77,7 @@ write_copy = [
     spacer(20),
     widget("text-editor", {"editor": (
         '<div style="display:flex;flex-wrap:wrap;gap:14px;">'
-        f'<a href="https://wa.me/393476324326" target="_blank" rel="noopener" '
+        f'<a href="https://wa.me/393476524326" target="_blank" rel="noopener" '
         f'style="display:inline-block;background:{GOLD};color:{CREAM};font-family:\'{FONT_BODY}\',sans-serif;'
         f'font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;'
         f'text-decoration:none;padding:14px 26px;border-radius:4px;">Scrivici su WhatsApp →</a>'
@@ -153,7 +153,7 @@ def contact_row(icon_fname, label):
 contact_html = (
     f'<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px;'
     f'font-size:14px;color:{INK_SOFT};">'
-    + contact_row("contact-phone.png", "347 6324326")
+    + contact_row("contact-phone.png", "347 6524326")
     + contact_row("contact-pin.png", "Via Ruzante 10, Codevigo (PD)")
     + contact_row("contact-instagram.png", "beauty_boutique.sc")
     + '</ul>'
@@ -197,8 +197,8 @@ SECTIONS.append(section([
            {"content_position": "center"}),
     column(40, [text(
         f'<div style="display:flex;gap:18px;align-items:center;justify-content:flex-end;font-size:12.5px;color:{INK_FAINT};">'
-        '<a href="#" style="color:inherit;text-decoration:none;">Privacy Policy</a>'
-        '<a href="#" style="color:inherit;text-decoration:none;">Cookie Policy</a>'
+        '<a href="/privacy-policy/" style="color:inherit;text-decoration:none;">Privacy Policy</a>'
+        '<a href="/cookie-policy/" style="color:inherit;text-decoration:none;">Cookie Policy</a>'
         '<span>Powered by <a href="https://nardianna.it" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Nardi Creates</a></span></div>')],
            {"content_position": "center"}),
 ], bottom_settings))
